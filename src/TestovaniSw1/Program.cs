@@ -17,6 +17,7 @@ namespace TestovaniSw1
             };
             double shipping = 50;
 
+            Console.WriteLine("Price Calculator 1.0");
             Console.WriteLine("Products:");
             foreach (var product in products)
             {
