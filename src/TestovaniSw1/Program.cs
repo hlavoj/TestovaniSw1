@@ -94,8 +94,4 @@ namespace TestovaniSw1
         }
     }
 
-    class Test
-    {
-        public string neco { get; set; }    
-    }
 }
