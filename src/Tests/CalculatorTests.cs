@@ -42,6 +42,16 @@ namespace Tests
         }
 
 
+        [TestMethod]
+        public void InputTest()
+        {
+            var newsPaper = new Product { Name = "NewsPaper", Price = 100 };
+            var apple = new Product { Name = "Apple", Price = 1000, IsSocialProduct = true };
+
+            var res = Program.GetSelectedProducts("Apple , NeWsPaper  ");
+            Assert.IsTrue(res.Contains(newsPaper));
+            Assert.IsTrue(res.Contains(apple));
+        }
 
     }
 }
