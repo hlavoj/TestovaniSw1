@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculatorService.cs" />
     <Compile Include="ConsoleUserInterface.cs" />
     <Compile Include="IConsoleUserInterface.cs" />
     <Compile Include="PriceCalculator.cs" />

@@ -23,7 +23,7 @@ namespace Tests
             var newsPaper = new Product { Name = "NewsPaper", Price = 100 };
             var apple = new Product { Name = "Apple", Price = 1000, IsSocialProduct = true };
 
-            var res = Program.GetSelectedProducts("Apple , NeWsPaper  ", Products);
+            var res = CalculatorService.GetSelectedProducts("Apple , NeWsPaper  ", Products);
             Assert.IsTrue(res.Contains(newsPaper));
             Assert.IsTrue(res.Contains(apple));
         }

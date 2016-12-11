@@ -58,7 +58,7 @@ namespace Tests
             mock.Setup(ui => ui.ReadAge()).Returns(40);
             mock.Setup(ui => ui.ReadProducts()).Returns("Scisors, NewsPaper ");
 
-            Program.CalculatePrice(mock.Object,50, Products);
+            CalculatorService.CalculatePrice(mock.Object,50, Products);
             mock.Verify(ui=> ui.WriteResult(239));
         }
 
