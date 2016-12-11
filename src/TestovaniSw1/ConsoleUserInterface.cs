@@ -5,28 +5,28 @@ namespace TestovaniSw1
 {
     internal class ConsoleUserInterface
     {
-        public static void WriteResult(double sum)
+        public void WriteResult(double sum)
         {
             Console.WriteLine($"Your price is {sum}");
             Console.ReadLine();
         }
 
-        public static void WriteAgeHint()
+        public void WriteAgeHint()
         {
             Console.WriteLine("enter your age:");
         }
 
-        public static int ReadAge()
+        public int ReadAge()
         {
             return int.Parse(Console.ReadLine());
         }
 
-        public static string ReadProducts()
+        public string ReadProducts()
         {
             return Console.ReadLine();
         }
 
-        public static void GetProgramInfo(double shipping, List<Product> products)
+        public void GetProgramInfo(double shipping, List<Product> products)
         {
             Console.WriteLine("Price Calculator 1.0");
             Console.WriteLine("Products:");
