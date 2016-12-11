@@ -34,6 +34,19 @@ namespace TestovaniSw1
 
             Console.WriteLine("enter names of product what you want to buy (Separated by ','):");
             var productsString = Console.ReadLine();
+            var selectedProducts = GetSelectedProducts(productsString);
+
+            Console.WriteLine("enter your age:");
+            var age = int.Parse(Console.ReadLine());
+
+            var sum = PriceCalculator.GetPrice(age, selectedProducts, Shipping);
+
+            Console.WriteLine($"Your price is {sum}");
+            Console.ReadLine();
+        }
+
+        internal static List<Product> GetSelectedProducts(string productsString)
+        {
             var productsInput = productsString.Split(',');
 
             for (int i = 0; i < productsInput.Length; i++)
@@ -42,50 +55,9 @@ namespace TestovaniSw1
             }
 
             var selectedProducts = (from product in Products
-                                    where productsInput.Contains(product.Name.ToLower())
-                                    select product).ToList();
-
-            Console.WriteLine("enter your age:");
-            var age = int.Parse(Console.ReadLine());
-
-            var sum = GetPrice(age, selectedProducts, Shipping);
-
-            Console.WriteLine($"Your price is {sum}");
-            Console.ReadLine();
-        }
-
-        internal static double GetPrice(int age, List<Product> selectedProducts, double shipping)
-        {
-            double sum = 0;
-            if (age < 26 || age > 65)
-            {
-                foreach (var selectedProduct in selectedProducts)
-                {
-                    if (selectedProduct.IsSocialProduct)
-                    {
-                        sum += selectedProduct.Price*0.87;
-                    }
-                    else
-                    {
-                        sum += selectedProduct.Price;
-                    }
-                }
-            }
-            else
-            {
-                sum = selectedProducts.Sum(product => product.Price);
-            }
-
-            if (selectedProducts.Count > 1)
-            {
-                sum = sum*0.9;
-            }
-
-            if (sum <= 250)
-            {
-                sum += shipping;
-            }
-            return sum;
+                where productsInput.Contains(product.Name.ToLower())
+                select product).ToList();
+            return selectedProducts;
         }
     }
 
