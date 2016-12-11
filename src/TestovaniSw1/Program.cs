@@ -6,8 +6,8 @@ namespace TestovaniSw1
 {
     internal class Program
     {
-        internal static double Shipping => 50;
-        private static List<Product> Products => new List<Product>(3)
+        private static double Shipping = 50;
+        private static List<Product> Products = new List<Product>(3)
             {
                 new Product {Name = "Scisors", Price = 200},
                 new Product {Name = "NewsPaper" , Price = 10},
@@ -18,14 +18,19 @@ namespace TestovaniSw1
         static void Main(string[] args)
         {
             ConsoleUserInterface consoleUserInterface = new ConsoleUserInterface();
-            consoleUserInterface.GetProgramInfo(Shipping, Products);
+            CalculatePrice(consoleUserInterface, Shipping, Products);
+        }
+
+        internal static void CalculatePrice(IConsoleUserInterface consoleUserInterface, double shipping, List<Product> products)
+        {     
+            consoleUserInterface.GetProgramInfo(shipping, products);
 
             var productsString = consoleUserInterface.ReadProducts();
-            var selectedProducts = GetSelectedProducts(productsString, Products);
+            var selectedProducts = GetSelectedProducts(productsString, products);
 
             consoleUserInterface.WriteAgeHint();
             var age = consoleUserInterface.ReadAge();
-            var sum = PriceCalculator.GetPrice(age, selectedProducts, Shipping);
+            var sum = PriceCalculator.GetPrice(age, selectedProducts, shipping);
 
             consoleUserInterface.WriteResult(sum);
         }

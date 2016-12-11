@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using TestovaniSw1;
 
 namespace Tests
@@ -48,6 +49,20 @@ namespace Tests
             var res = PriceCalculator.GetPrice(99, Products.Where(p => p.Name == "Apple" || p.Name == "NewsPaper").ToList(), 50);
             Assert.AreEqual(792, res);
         }
+
+
+        [TestMethod]
+        public void SimplePriceMoq()
+        {
+            var mock = new Mock<IConsoleUserInterface>();
+            mock.Setup(ui => ui.ReadAge()).Returns(40);
+            mock.Setup(ui => ui.ReadProducts()).Returns("Scisors, NewsPaper ");
+
+            Program.CalculatePrice(mock.Object,50, Products);
+            mock.Verify(ui=> ui.WriteResult(239));
+        }
+
+
 
 
 
