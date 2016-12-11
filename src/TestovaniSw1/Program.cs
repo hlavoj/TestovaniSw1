@@ -93,4 +93,9 @@ namespace TestovaniSw1
             return $"Name: {Name}, Price: {Price}";
         }
     }
+
+    class Test
+    {
+        public string neco { get; set; }    
+    }
 }
