@@ -4,22 +4,23 @@ using System.Linq;
 
 namespace TestovaniSw1
 {
-    class Program
+    internal class Program
     {
+        internal static double Shipping => 50;
+        internal static List<Product> Products => new List<Product>(3)
+            {
+                new Product {Name = "Scisors", Price = 200},
+                new Product {Name = "NewsPaper" , Price = 10},
+                new Product {Name = "Magazine" , Price = 100},
+                new Product {Name = "Apple" , Price = 1000 , IsSocialProduct = true}
+            };
 
         static void Main(string[] args)
         {
-            List<Product> products = new List<Product>(3)
-            {
-                new Product {Name = "Scisors", Price = 200},
-                new Product {Name = "NewsPaper" , Price = 100},
-                new Product {Name = "Apple" , Price = 1000 , IsSocialProduct = true}
-            };
-            double shipping = 50;
 
             Console.WriteLine("Price Calculator 1.0");
             Console.WriteLine("Products:");
-            foreach (var product in products)
+            foreach (var product in Products)
             {
                 Console.WriteLine(product);
             }
@@ -28,7 +29,7 @@ namespace TestovaniSw1
             Console.WriteLine("pro mladsi 26 a starsi 65 sleva 13% na socialni produkty");
             Console.WriteLine("pri nakupu nad 250 postovne zdarma  ");
             //Console.WriteLine("Maximalne 2 slevy najednou ");
-            Console.WriteLine($"Doprava {shipping}");
+            Console.WriteLine($"Doprava {Shipping}");
             Console.WriteLine("----------------------------");
 
             Console.WriteLine("enter names of product what you want to buy (Separated by ','):");
@@ -40,13 +41,21 @@ namespace TestovaniSw1
                 productsInput[i] = productsInput[i].ToLower().Trim();
             }
 
-            var selectedProducts = (from product in products
+            var selectedProducts = (from product in Products
                                     where productsInput.Contains(product.Name.ToLower())
                                     select product).ToList();
 
             Console.WriteLine("enter your age:");
             var age = int.Parse(Console.ReadLine());
 
+            var sum = GetPrice(age, selectedProducts, Shipping);
+
+            Console.WriteLine($"Your price is {sum}");
+            Console.ReadLine();
+        }
+
+        internal static double GetPrice(int age, List<Product> selectedProducts, double shipping)
+        {
             double sum = 0;
             if (age < 26 || age > 65)
             {
@@ -54,7 +63,7 @@ namespace TestovaniSw1
                 {
                     if (selectedProduct.IsSocialProduct)
                     {
-                        sum += selectedProduct.Price * 0.87;
+                        sum += selectedProduct.Price*0.87;
                     }
                     else
                     {
@@ -69,16 +78,14 @@ namespace TestovaniSw1
 
             if (selectedProducts.Count > 1)
             {
-                sum = sum * 0.9;
+                sum = sum*0.9;
             }
 
             if (sum <= 250)
             {
                 sum += shipping;
             }
-
-            Console.WriteLine($"Your price is {sum}");
-            Console.ReadLine();
+            return sum;
         }
     }
 
